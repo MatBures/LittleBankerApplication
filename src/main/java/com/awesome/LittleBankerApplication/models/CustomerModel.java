@@ -16,15 +16,15 @@ public class CustomerModel {
 
 
     //Name column
-    @Column
+    @Column(name = "name")
     @NotBlank(message = "Please specify name.")
     private String name;
 
-    @Column
+    @Column(name = "surname")
     @NotBlank(message = "Please specify surname.")
     private String surname;
 
-    @Column
+    @Column(name = "sex")
     @NotBlank(message = "Please specify sex.")
     private String sex;
 
