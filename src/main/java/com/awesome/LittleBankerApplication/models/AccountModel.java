@@ -9,7 +9,7 @@ public class AccountModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int accountId;
+    private Long accountId;
 
     @Column
     private String iban;
@@ -39,5 +39,25 @@ public class AccountModel {
 
     public double getAccountBalance() {
         return accountBalance;
+    }
+
+    public Long getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
+    }
+
+    public void setIban(String iban) {
+        this.iban = iban;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public void setAccountBalance(double accountBalance) {
+        this.accountBalance = accountBalance;
     }
 }

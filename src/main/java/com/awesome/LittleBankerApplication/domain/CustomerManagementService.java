@@ -42,8 +42,8 @@ public class CustomerManagementService {
             customerModelInDb.setNationality(customerModelUpdateInfo.getNationality());
             customerModelInDb.setDateOfBirth(customerModelUpdateInfo.getDateOfBirth());
             customerModelInDb.setCardNumber(customerModelUpdateInfo.getCardNumber());
-            customerModelInDb.setDateOfCardExpiration(customerModelUpdateInfo.getDateOfCardExpiration());
             customerModelInDb.setDateOfCardIssue(customerModelUpdateInfo.getDateOfCardIssue());
+            customerModelInDb.setDateOfCardExpiration(customerModelUpdateInfo.getDateOfCardExpiration());
 
             customerRepository.save(customerModelInDb);
         }

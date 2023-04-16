@@ -3,8 +3,7 @@ package com.awesome.LittleBankerApplication.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "customers")
@@ -12,10 +11,9 @@ public class CustomerModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int customerId;
+    @Column(name = "customer_id")
+    private Long customerId;
 
-
-    //Name column
     @Column(name = "name")
     @NotBlank(message = "Please specify name.")
     private String name;
@@ -28,38 +26,42 @@ public class CustomerModel {
     @NotBlank(message = "Please specify sex.")
     private String sex;
 
-    @Column
+    @Column(name = "nationality")
     @NotBlank(message = "Please specify nationality.")
     private String nationality;
 
-    @Column
+    @Column(name = "date_of_birth")
     @NotNull(message = "Please specify date of birth.")
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
-    @Column
+    @Column(name = "card_number")
+    @NotNull(message = "Please specify date of birth.")
     private String cardNumber;
 
-    @Column
-    private Date dateOfCardExpiration;
+    @Column(name = "date_of_card_issue")
+    @NotNull(message = "Please specify date of card issue.")
+    private LocalDate dateOfCardIssue;
 
-    @Column
-    private Date dateOfCardIssue;
+    @Column(name = "date_of_card_expiration")
+    @NotNull(message = "Please specify date of card expiration.")
+    private LocalDate dateOfCardExpiration;
+
 
     public CustomerModel() {
     }
 
-    public CustomerModel(String name, String surname, String sex, String nationality, Date dateOfBirth, String cardNumber, Date dateOfCardExpiration, Date dateOfCardIssue) {
+    public CustomerModel(String name, String surname, String sex, String nationality, LocalDate dateOfBirth, String cardNumber, LocalDate dateOfCardIssue, LocalDate dateOfCardExpiration) {
         this.name = name;
         this.surname = surname;
         this.sex = sex;
         this.nationality = nationality;
         this.dateOfBirth = dateOfBirth;
         this.cardNumber = cardNumber;
-        this.dateOfCardExpiration = dateOfCardExpiration;
         this.dateOfCardIssue = dateOfCardIssue;
+        this.dateOfCardExpiration = dateOfCardExpiration;
     }
 
-    public int getCustomerId() {
+    public Long getCustomerId() {
         return customerId;
     }
 
@@ -79,7 +81,7 @@ public class CustomerModel {
         return nationality;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
@@ -87,11 +89,11 @@ public class CustomerModel {
         return cardNumber;
     }
 
-    public Date getDateOfCardExpiration() {
+    public LocalDate getDateOfCardExpiration() {
         return dateOfCardExpiration;
     }
 
-    public Date getDateOfCardIssue() {
+    public LocalDate getDateOfCardIssue() {
         return dateOfCardIssue;
     }
 
@@ -111,7 +113,7 @@ public class CustomerModel {
         this.nationality = nationality;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -119,11 +121,11 @@ public class CustomerModel {
         this.cardNumber = cardNumber;
     }
 
-    public void setDateOfCardExpiration(Date dateOfCardExpiration) {
+    public void setDateOfCardExpiration(LocalDate dateOfCardExpiration) {
         this.dateOfCardExpiration = dateOfCardExpiration;
     }
 
-    public void setDateOfCardIssue(Date dateOfCardIssue) {
+    public void setDateOfCardIssue(LocalDate dateOfCardIssue) {
         this.dateOfCardIssue = dateOfCardIssue;
     }
 }
