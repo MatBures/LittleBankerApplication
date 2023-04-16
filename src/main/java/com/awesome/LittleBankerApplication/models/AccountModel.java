@@ -11,13 +11,14 @@ public class AccountModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long accountId;
 
-    @Column
+    @Column(name = "iban",
+            unique = true)
     private String iban;
 
-    @Column
+    @Column(name = "currency")
     private String currency;
 
-    @Column
+    @Column(name = "accountBalance")
     private double accountBalance;
 
     public AccountModel() {

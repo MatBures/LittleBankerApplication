@@ -35,13 +35,13 @@ public class AccountController {
         return ResponseEntity.ok(accountModel);
     }
 
-    @DeleteMapping(value = "/unregister")
+    @DeleteMapping(value = "/unregister/{accountId}")
     public ResponseEntity<Void> removeAccount(@PathVariable Integer accountId) {
         accountManagementService.removeAccount(accountId);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping(value = "/update")
+    @PutMapping(value = "/update/{accountId}")
     public ResponseEntity<AccountModel> updateAccountInformation(@PathVariable Integer accountId,
                                                                  @RequestBody AccountModel accountModelUpdateInfo) {
         accountModelUpdateInfo.setAccountId(Long.valueOf(accountId));
@@ -49,7 +49,7 @@ public class AccountController {
         return ResponseEntity.ok(accountModelUpdateInfo);
     }
 
-    @GetMapping(value = "/get")
+    @GetMapping(value = "/get/{accountId}")
     public ResponseEntity<AccountModel> getAccount(@PathVariable Integer accountId) {
         Optional<AccountModel> accountModelOptional = accountManagementService.getAccount(accountId);
         if (accountModelOptional.isPresent()) {
