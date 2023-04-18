@@ -1,15 +1,11 @@
 package com.awesome.LittleBankerApplication.domain;
 
 import com.awesome.LittleBankerApplication.models.AccountModel;
-import com.awesome.LittleBankerApplication.models.CustomerModel;
 import com.awesome.LittleBankerApplication.repository.AccountRepository;
-import com.awesome.LittleBankerApplication.repository.CustomerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

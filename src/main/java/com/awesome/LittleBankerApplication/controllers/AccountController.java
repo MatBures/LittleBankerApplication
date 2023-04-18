@@ -30,7 +30,7 @@ public class AccountController {
     private AccountManagementService accountManagementService;
 
     @PostMapping(value = "/register")
-    public ResponseEntity<AccountModel> createAccount(@RequestBody AccountModel accountModel) {
+    public ResponseEntity<AccountModel> createAccount(@RequestBody AccountModel accountModel) throws Exception {
         accountManagementService.createAccount(accountModel);
         return ResponseEntity.ok(accountModel);
     }
