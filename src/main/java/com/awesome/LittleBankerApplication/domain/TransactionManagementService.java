@@ -4,6 +4,7 @@ import com.awesome.LittleBankerApplication.models.AccountModel;
 import com.awesome.LittleBankerApplication.models.TransactionModel;
 import com.awesome.LittleBankerApplication.repository.AccountRepository;
 import com.awesome.LittleBankerApplication.repository.TransactionRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -21,7 +22,8 @@ public class TransactionManagementService {
         this.accountRepository = accountRepository;
     }
 
-    public void transferCredits(String sourceIban, String targetIban, double amountToTransfer) throws Exception {
+    @Transactional
+    public synchronized void transferCredits(String sourceIban, String targetIban, double amountToTransfer) throws Exception {
 
         Optional<AccountModel> sourceAccount = accountRepository.findByIban(sourceIban);
         Optional<AccountModel> targetAccount = accountRepository.findByIban(targetIban);
@@ -46,13 +48,10 @@ public class TransactionManagementService {
         target.setAccountBalance(target.getAccountBalance() + amountToTransfer);
         accountRepository.save(target);
 
-
-        TransactionModel transaction = new TransactionModel(new Date(), amountToTransfer, sourceIban, targetIban);
-        transactionRepository.save(transaction);
     }
 
-    public List<TransactionModel> getTransactionHistory() {
+    @Transactional
+    public synchronized List<TransactionModel> getTransactionHistory() {
         return transactionRepository.findAll();
     }
-
 }
