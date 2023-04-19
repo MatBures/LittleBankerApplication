@@ -61,8 +61,16 @@ public class TransactionManagementService {
         transactionRepository.save(transaction);
     }
 
-    @Transactional
     public synchronized List<TransactionModel> getTransactionHistory() {
         return transactionRepository.findAll();
     }
+
+    public synchronized List<TransactionModel> searchTransactionsByAmount(Double amountTransferred) {
+        return transactionRepository.findByAmountTransferred(amountTransferred);
+    }
+
+    public synchronized List<TransactionModel> searchTransactionsByIban(String iban) {
+        return transactionRepository.findBySourceIbanOrTargetIban(iban, iban);
+    }
 }
+

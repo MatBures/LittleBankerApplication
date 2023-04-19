@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 /**
  * Customer controller
- *
  * Responsible for listing to REST requests regarding:
  *   - registering new customer
  *   - deleting registered customer from db

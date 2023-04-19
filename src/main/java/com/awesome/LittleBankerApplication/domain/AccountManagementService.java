@@ -18,6 +18,11 @@ public class AccountManagementService {
     private AccountRepository accountRepository;
 
     public synchronized void createAccount(AccountModel accountModel) {
+        if(accountModel.getAccountBalance() == 0.0) {
+
+            //In case study was written when creating account add some money for transactions (if not specified)
+            accountModel.setAccountBalance(1000.0);
+        }
         accountRepository.save(accountModel);
     }
 

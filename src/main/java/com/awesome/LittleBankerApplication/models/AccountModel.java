@@ -32,7 +32,7 @@ public class AccountModel {
     private String currency;
 
     @Column(name = "accountBalance")
-    private double accountBalance;
+    private Double accountBalance;
 
     public AccountModel() {
     }
