@@ -6,6 +6,14 @@ import jakarta.validation.constraints.NotBlank;
 
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
+/**
+ * AccountModel has three instance variables: accountId, iban, currency and accountBalance.
+ * accountId is a Long value that is the primary key of the account entity in the database.
+ * iban is a String value that represents the International Bank Account Number of the account.
+ * currency is a String value that represents the currency of the account.
+ * accountBalance is a Double value that represents the current balance of the account.
+ * It also has getter and setter methods for all instance variables, allowing for easy access and modification of the account properties.
+ */
 @Entity
 @Table(name = "accounts")
 public class AccountModel {

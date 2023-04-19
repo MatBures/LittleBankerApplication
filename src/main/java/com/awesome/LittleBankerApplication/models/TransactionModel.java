@@ -8,6 +8,11 @@ import java.util.Date;
 
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
+/**
+ * Transaction Model represents a transaction object that holds information such as transaction id,
+ * date of transaction, amount to be transferred, source and target iban.
+ * It also contains getters and setters for each property of the transaction object.
+ */
     @Entity
     @Table(name = "transactions")
     public class TransactionModel {

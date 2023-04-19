@@ -3,10 +3,16 @@ package com.awesome.LittleBankerApplication.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
+/**
+ * Customer Model represents a customer in the system. It contains information about the customer's name,
+ * surname, sex, nationality, date of birth, card number, date of card issue, and date of card expiration.
+ * The class also includes methods to get and set each of these properties.
+ */
 @Entity
 @Table(name = "customers")
 public class CustomerModel {
