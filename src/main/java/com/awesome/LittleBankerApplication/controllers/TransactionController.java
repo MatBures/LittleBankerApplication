@@ -2,6 +2,7 @@ package com.awesome.LittleBankerApplication.controllers;
 
 import com.awesome.LittleBankerApplication.domain.TransactionManagementService;
 import com.awesome.LittleBankerApplication.models.TransactionModel;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,9 +18,9 @@ public class TransactionController {
     }
 
     @PostMapping("/transfer")
-    public ResponseEntity<String> transferCredits(@RequestBody TransactionModel transactionModel) {
+    public ResponseEntity<String> transferCredits(@Valid @RequestBody TransactionModel transactionModel) {
         try {
-            transactionService.transferCredits(transactionModel.getSourceIban(), transactionModel.getTargetIban(), transactionModel.getAmountToBeTransferred());
+            transactionService.transferCredits(transactionModel.getSourceIban(), transactionModel.getTargetIban(), transactionModel.getAmountTransferred());
             return ResponseEntity.ok().body("Transaction completed successfully.");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -37,4 +38,5 @@ public class TransactionController {
                                                      @RequestParam(required = false) String message) {
         return transactionService.searchTransactions(amount, iban, message);
         */
-    }
+
+}

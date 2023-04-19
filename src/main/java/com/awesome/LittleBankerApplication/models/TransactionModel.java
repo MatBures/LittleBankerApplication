@@ -2,6 +2,7 @@ package com.awesome.LittleBankerApplication.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
 
@@ -21,15 +22,14 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
                 strategy = SEQUENCE,
                 generator = "transaction_sequence"
         )
-        private int accountId;
+        private Long transactionId;
 
         @Column(name = "date_of_transaction")
-        @NotBlank(message = "Please date of transaction.")
         private Date dateOfTransaction;
 
         @Column(name = "amount_to_be_transferred")
-        @NotBlank(message = "Please specify amount to be transferred.")
-        private double amountToBeTransferred;
+        @NotNull(message = "Please specify amount to be transferred.")
+        private Double amountTransferred;
 
         @Column(name = "source_Iban")
         @NotBlank(message = "Please specify source Iban.")
@@ -42,27 +42,27 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
         public TransactionModel() {
         }
 
-        public TransactionModel(Date dateOfTransaction, double amountToBeTransferred, String sourceIban, String targetIban) {
+        public TransactionModel(Date dateOfTransaction, Double amountTransferred, String sourceIban, String targetIban) {
             this.dateOfTransaction = dateOfTransaction;
-            this.amountToBeTransferred = amountToBeTransferred;
+            this.amountTransferred = amountTransferred;
             this.sourceIban = sourceIban;
             this.targetIban = targetIban;
         }
 
-        public int getAccountId() {
-            return accountId;
+        public Long getTransactionId() {
+            return transactionId;
         }
 
-        public void setAccountId(int accountId) {
-            this.accountId = accountId;
+        public void setTransactionId(Long transactionId) {
+            this.transactionId = transactionId;
         }
 
         public void setDateOfTransaction(Date dateOfTransaction) {
             this.dateOfTransaction = dateOfTransaction;
         }
 
-        public void setAmountToBeTransferred(double amountToBeTransferred) {
-            this.amountToBeTransferred = amountToBeTransferred;
+        public void setAmountTransferred(double amountToBeTransferred) {
+            this.amountTransferred = amountToBeTransferred;
         }
 
         public void setSourceIban(String sourceIban) {
@@ -77,8 +77,8 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
             return dateOfTransaction;
         }
 
-        public double getAmountToBeTransferred() {
-            return amountToBeTransferred;
+        public double getAmountTransferred() {
+            return amountTransferred;
         }
 
         public String getSourceIban() {
