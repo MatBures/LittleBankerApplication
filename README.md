@@ -1,21 +1,21 @@
 # LittleBankerApplication
 Welcome to little banker application, a RESTful service that mimics small banking enterprises
 
-## Controllers
-The little-banker service provides the following controllers:
+## Controllers and Services
+The little-banker service provides the following controllers and services:
 
-## Customer Management Controller
+## Customer Maganement Service / Controller
  -Create a new customer  
  -Remove an existing customer  
  -Modify customer details
 
-## Account Management Controller
+## Account Management Service / Controller
  -Create a new account  
  -Remove an existing account  
  -Modify account details  
  -View account summary  
 
-## Transaction Operations Controller
+## Transaction Management Service / Controller
  -Transfer credits from one account to another  
  -View history of transactions  
  -Lookup and search in the history of transactions, search by amount, IBAN, message  
