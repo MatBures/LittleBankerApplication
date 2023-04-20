@@ -26,6 +26,10 @@ public class CustomerManagementService {
     @Autowired
     private CustomerRepository customerRepository;
 
+    @Autowired
+    public void setCustomerRepository(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
     // Register a new customer by saving their details to the repository.
     public synchronized void registerNewCustomer(CustomerModel customerModel) {
         customerRepository.save(customerModel);

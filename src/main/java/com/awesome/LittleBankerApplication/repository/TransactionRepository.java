@@ -2,11 +2,14 @@ package com.awesome.LittleBankerApplication.repository;
 
 import com.awesome.LittleBankerApplication.models.TransactionModel;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 /**
  * This is a Spring Data JPA repository interface for TransactionModel.
  */
+@Repository
 public interface TransactionRepository extends JpaRepository<TransactionModel, Long> {
 
     // This method finds all transactions with the given amountTransferred.
