@@ -96,7 +96,6 @@ public class CustomerManagementServiceTest {
         assertNull(customerRepository.findById(customerId).orElse(null));
     }
 
-
     @Test
     public void updateCustomerInformationTest() {
 

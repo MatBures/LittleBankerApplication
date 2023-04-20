@@ -49,7 +49,14 @@ little banker application contains the following attributes for the entities:
 To run the little banker service, you need to follow these steps:
 
 Clone the repository from GitHub.  
-Install the required dependencies by running mvn install.  
+
+## Tests
+Install the required dependencies by running mvn install.
+When running mvn install the application will run tests for services
+ -CustomerManagementServiceTest
+ -AccountManagementServiceTest
+ -TransactionManagementServiceTest
+
 Start the service by running mvn spring-boot:run.  
 
 ## Usage
