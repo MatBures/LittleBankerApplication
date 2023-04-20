@@ -16,7 +16,7 @@ import java.util.Optional;
 /**
  * Transaction Management Service
  * represents a service for managing transactions between two accounts. It contains methods for transferring credits from
- * one account to another, retrieving the transaction history, and searching transactions by amount transferred or IBAN.
+ * one account to another, retrieving the transaction history, and searching transactions by amount transferred, IBAN or message.
  * The service is implemented using a transactional method to ensure that the transfer operation is atomic and synchronized methods
  * to ensure thread safety.
  */
@@ -38,7 +38,7 @@ public class TransactionManagementService {
 
     // The method is also transactional to ensure that the transfer operation is atomic.
     @Transactional
-    public synchronized void transferCredits(String sourceIban, String targetIban, Double amountToTransfer) throws Exception {
+    public synchronized void transferCredits(String sourceIban, String targetIban, Double amountToTransfer, String message) throws Exception {
 
         // Find the source and target accounts in the repository.
         Optional<AccountModel> sourceAccount = accountRepository.findByIban(sourceIban);
@@ -77,7 +77,7 @@ public class TransactionManagementService {
         logger.info("Account two new balance: " + sourceAccount.get().getAccountBalance());
 
         // Create a new transaction object and save it to the repository.
-        TransactionModel transaction = new TransactionModel(new Date(), amountToTransfer, sourceIban, targetIban);
+        TransactionModel transaction = new TransactionModel(new Date(), amountToTransfer, sourceIban, targetIban, message);
         transactionRepository.save(transaction);
     }
 
@@ -94,6 +94,11 @@ public class TransactionManagementService {
     // Method to search transactions by IBAN.
     public synchronized List<TransactionModel> searchTransactionsByIban(String iban) {
         return transactionRepository.findBySourceIbanOrTargetIban(iban, iban);
+    }
+
+    // Method to search transactions by message.
+    public synchronized List<TransactionModel> searchTransactionsByMessage(String message) {
+        return transactionRepository.findByMessage(message);
     }
 }
 

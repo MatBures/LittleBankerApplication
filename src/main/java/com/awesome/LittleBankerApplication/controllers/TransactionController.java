@@ -22,7 +22,7 @@ import java.util.Map;
  *  Responsible for handling REST requests related to:
  *  transferring credits from one account to another
  *  retrieving transaction history
- *  searching transaction history by IBAN or amount
+ *  searching transaction history by IBAN, amount transferred or message.
  */
 
 @RestController
@@ -48,7 +48,7 @@ public class TransactionController {
 
         try {
             // Transfer the credits using the transaction service.
-            transactionService.transferCredits(transactionModel.getSourceIban(), transactionModel.getTargetIban(), transactionModel.getAmountTransferred());
+            transactionService.transferCredits(transactionModel.getSourceIban(), transactionModel.getTargetIban(), transactionModel.getAmountTransferred(), transactionModel.getMessage());
 
             // Log the success of the transaction using the logger.
             logger.info("Transaction with id: " + transactionModel.getTransactionId() + " was successful.");
@@ -96,6 +96,24 @@ public class TransactionController {
 
         // Log the search operation using the logger.
         logger.info("Searching history of transaction by amountTransferred : " +amountTransferred);
+
+        // If no transactions were found, return a response entity with a not found status code.
+        if (transactions.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // Otherwise, return a response entity with the list of transactions.
+        return ResponseEntity.ok(transactions);
+    }
+
+    // Endpoint for search transactions by message.
+    @GetMapping("/search/by-message/{message}")
+    public ResponseEntity<List<TransactionModel>> searchTransactionsByMessage(@PathVariable("message") String message) {
+        // Search for transactions with the specified amount transferred using the transaction service.
+        List<TransactionModel> transactions = transactionService.searchTransactionsByMessage(message);
+
+        // Log the search operation using the logger.
+        logger.info("Searching history of transaction by message : " + message);
 
         // If no transactions were found, return a response entity with a not found status code.
         if (transactions.isEmpty()) {

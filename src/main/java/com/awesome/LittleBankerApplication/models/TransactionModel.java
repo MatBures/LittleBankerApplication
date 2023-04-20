@@ -10,7 +10,7 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
 
 /**
  * Transaction Model represents a transaction object that holds information such as transaction id,
- * date of transaction, amount to be transferred, source and target iban.
+ * date of transaction, amount to be transferred, source and target iban and message.
  * It also contains getters and setters for each property of the transaction object.
  */
     @Entity
@@ -44,14 +44,18 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
         @NotBlank(message = "Please specify target Iban.")
         private String targetIban;
 
+        @Column(name = "message")
+        private String message;
+
         public TransactionModel() {
         }
 
-        public TransactionModel(Date dateOfTransaction, Double amountTransferred, String sourceIban, String targetIban) {
+        public TransactionModel(Date dateOfTransaction, Double amountTransferred, String sourceIban, String targetIban, String message) {
             this.dateOfTransaction = dateOfTransaction;
             this.amountTransferred = amountTransferred;
             this.sourceIban = sourceIban;
             this.targetIban = targetIban;
+            this.message = message;
         }
 
         public Long getTransactionId() {
@@ -66,7 +70,7 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
             this.dateOfTransaction = dateOfTransaction;
         }
 
-        public void setAmountTransferred(double amountToBeTransferred) {
+        public void setAmountTransferred(Double amountToBeTransferred) {
             this.amountTransferred = amountToBeTransferred;
         }
 
@@ -93,4 +97,12 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
         public String getTargetIban() {
             return targetIban;
         }
+
+        public String getMessage() {
+        return message;
     }
+
+        public void setMessage(String message) {
+        this.message = message;
+    }
+}

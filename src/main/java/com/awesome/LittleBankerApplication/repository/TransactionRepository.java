@@ -14,4 +14,7 @@ public interface TransactionRepository extends JpaRepository<TransactionModel, L
 
     // This method finds all transactions with the given sourceIban or targetIban.
     List<TransactionModel> findBySourceIbanOrTargetIban(String sourceIban, String targetIban);
+
+    // This method finds all transactions with the given message.
+    List<TransactionModel> findByMessage(String message);
 }
