@@ -1,4 +1,4 @@
-package com.awesome.LittleBankerApplication.services;
+package com.awesome.LittleBankerApplication.servicesTesting;
 
 import com.awesome.LittleBankerApplication.domain.AccountManagementService;
 import com.awesome.LittleBankerApplication.models.AccountModel;
