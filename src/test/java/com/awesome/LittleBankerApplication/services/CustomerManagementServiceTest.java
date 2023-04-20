@@ -133,5 +133,4 @@ public class CustomerManagementServiceTest {
             fail("Could not find customer in repository.");
         }
     }
-
 }

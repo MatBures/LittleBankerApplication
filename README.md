@@ -52,10 +52,10 @@ Clone the repository from GitHub.
 
 ## Tests
 Install the required dependencies by running mvn install.
-When running mvn install the application will run tests for services
- -CustomerManagementServiceTest
- -AccountManagementServiceTest
- -TransactionManagementServiceTest
+When running mvn install the application will run tests for services  
+ -CustomerManagementServiceTest  
+ -AccountManagementServiceTest  
+ -TransactionManagementServiceTest  
 
 Start the service by running mvn spring-boot:run.  
 
