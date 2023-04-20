@@ -36,8 +36,9 @@ little banker application contains the following attributes for the entities:
 ## Account
  -IBAN  
  -Currency  
- -Balance  
- -Transfer  
+ -Balance
+ 
+## Transfer  
  -Date  
  -Amount  
  -Source IBAN  
