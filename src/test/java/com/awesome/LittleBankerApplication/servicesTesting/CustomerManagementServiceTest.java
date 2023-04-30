@@ -90,7 +90,7 @@ public class CustomerManagementServiceTest {
         Long customerId = customer1.getCustomerId();
 
         // Delete the registered customer by their ID
-        customerManagementService.deleteCustomer(customerId.intValue());
+        customerManagementService.deleteCustomer(customerId);
 
         // Check that the customer was deleted from the repository
         assertNull(customerRepository.findById(customerId).orElse(null));

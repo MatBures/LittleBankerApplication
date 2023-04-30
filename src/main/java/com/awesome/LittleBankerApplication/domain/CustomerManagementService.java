@@ -5,6 +5,7 @@ import com.awesome.LittleBankerApplication.repository.CustomerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +24,6 @@ public class CustomerManagementService {
     private static final Logger logger = LoggerFactory.getLogger(CustomerManagementService.class);
 
     // A repository for managing customer data.
-    @Autowired
     private CustomerRepository customerRepository;
 
     @Autowired
@@ -41,8 +41,19 @@ public class CustomerManagementService {
     }
 
     // Deletes a customer with the specified ID from the repository.
-    public synchronized void deleteCustomer(Integer id) {
-        customerRepository.deleteById(Long.valueOf(id));
+    public synchronized boolean deleteCustomer(Long id) {
+
+        // Check if the customer with the given id exists in the repository.
+        Optional<CustomerModel> customer = customerRepository.findById(id);
+
+        // If the customer exists, delete them from the repository and return true.
+        if (customer.isPresent()) {
+            customerRepository.deleteById(id);
+            return true;
+        }
+
+        // If the customer doesn't exist, return false.
+        return false;
     }
 
     // Updates the information of a customer in the repository.

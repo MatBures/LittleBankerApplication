@@ -68,20 +68,17 @@ public class CustomerController {
         return ResponseEntity.ok().body("Customer " + customerModel.getName() + " was successfully updated.");
     }
 
-    // Endpoint for deleting an existing customer.
-    @DeleteMapping(value = "/unregister")
-    public ResponseEntity<?> deleteCustomer(@RequestBody Integer customerId) {
-
-        // Log that an existing customer is being un-registered.
+    @DeleteMapping(value = "/unregister/{customerId}")
+    public ResponseEntity<?> deleteCustomer(@PathVariable Long customerId) {
         logger.info("Attempt to unregister customer initiated, customer Id: " + customerId);
+        boolean success = customerManagementService.deleteCustomer(customerId);
 
-        // Call the customer management service to delete the customer.
-        customerManagementService.deleteCustomer(customerId);
-
-        // Return a success response.
-        return ResponseEntity.ok().body("Customer Id " + customerId + " was successfully un-registered.");
+        if (success) {
+            return ResponseEntity.ok().body("Customer Id " + customerId + " was successfully un-registered.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Customer Id " + customerId + " not found.");
+        }
     }
-
 
     // Endpoint for retrieving an overview of all registered customers.
     @GetMapping(value = "/getAll", produces = MediaType.APPLICATION_JSON_VALUE)
