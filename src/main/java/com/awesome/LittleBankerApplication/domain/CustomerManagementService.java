@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 /**
@@ -60,20 +61,23 @@ public class CustomerManagementService {
     public synchronized void updateCustomerInformation(CustomerModel customerModelUpdateInfo) {
         Long customerId = Long.valueOf(customerModelUpdateInfo.getCustomerId());
         Optional<CustomerModel> customerById = customerRepository.findById(customerId);
-        if (customerById.isPresent()) {
-            logger.info("Customer Id " + customerId + " is being updated in db.");
-            CustomerModel customerModelInDb = customerById.get();
-            customerModelInDb.setName(customerModelUpdateInfo.getName());
-            customerModelInDb.setSurname(customerModelUpdateInfo.getSurname());
-            customerModelInDb.setSex(customerModelUpdateInfo.getSex());
-            customerModelInDb.setNationality(customerModelUpdateInfo.getNationality());
-            customerModelInDb.setDateOfBirth(customerModelUpdateInfo.getDateOfBirth());
-            customerModelInDb.setCardNumber(customerModelUpdateInfo.getCardNumber());
-            customerModelInDb.setDateOfCardIssue(customerModelUpdateInfo.getDateOfCardIssue());
-            customerModelInDb.setDateOfCardExpiration(customerModelUpdateInfo.getDateOfCardExpiration());
 
-            customerRepository.save(customerModelInDb);
+        if (!customerById.isPresent()) {
+            throw new NoSuchElementException("Customer with id " + customerId + " does not exist");
         }
+
+        logger.info("Customer Id " + customerId + " is being updated in db.");
+        CustomerModel customerModelInDb = customerById.get();
+        customerModelInDb.setName(customerModelUpdateInfo.getName());
+        customerModelInDb.setSurname(customerModelUpdateInfo.getSurname());
+        customerModelInDb.setSex(customerModelUpdateInfo.getSex());
+        customerModelInDb.setNationality(customerModelUpdateInfo.getNationality());
+        customerModelInDb.setDateOfBirth(customerModelUpdateInfo.getDateOfBirth());
+        customerModelInDb.setCardNumber(customerModelUpdateInfo.getCardNumber());
+        customerModelInDb.setDateOfCardIssue(customerModelUpdateInfo.getDateOfCardIssue());
+        customerModelInDb.setDateOfCardExpiration(customerModelUpdateInfo.getDateOfCardExpiration());
+
+        customerRepository.save(customerModelInDb);
     }
 
 }

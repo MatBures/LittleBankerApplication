@@ -14,10 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 /**
  * Customer controller
  * Responsible for listing to REST requests regarding:
@@ -57,25 +55,50 @@ public class CustomerController {
     //Endpoint for updating an existing customer.
     @PostMapping(value = "/update")
     public ResponseEntity<?> updateCustomer(@Valid @RequestBody CustomerModel customerModel) {
+        try {
 
-        // Log that an existing customer update is being attempted.
-        logger.info("Attempt to update customer information initiated, customer name: " + customerModel.getName());
+            // Log that an existing customer update is being attempted.
+            logger.info("Attempt to update customer information initiated, customer name: " + customerModel.getName());
 
-        // Call the customer management service to update the customer.
-        customerManagementService.updateCustomerInformation(customerModel);
+            // Call the customer management service to update the customer.
+            customerManagementService.updateCustomerInformation(customerModel);
 
-        // Return a success response.
-        return ResponseEntity.ok().body("Customer " + customerModel.getName() + " was successfully updated.");
+            // Return a success response.
+            return ResponseEntity.ok().body("Customer " + customerModel.getName() + " was successfully updated.");
+        } catch (NoSuchElementException ex) {
+
+            // Log the error.
+            logger.error("Failed to update customer with id: " + customerModel.getCustomerId(), ex);
+
+            // Return a response with a 404 Not Found status code and an error message.
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Customer with id " + customerModel.getCustomerId() + " not found");
+        } catch (Exception ex) {
+
+            // Log the error.
+            logger.error("Failed to update customer with id: " + customerModel.getCustomerId(), ex);
+
+            // Return a response with a 500 Internal Server Error status code and an error message.
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update customer with id: " + customerModel.getCustomerId());
+        }
     }
 
+    //Endpoint for deleting and existing customer.
     @DeleteMapping(value = "/unregister/{customerId}")
     public ResponseEntity<?> deleteCustomer(@PathVariable Long customerId) {
+
+        // Log that an existing customer update is being attempted.
         logger.info("Attempt to unregister customer initiated, customer Id: " + customerId);
+
+        // Call the customer management service to check if the customer exists and delete the customer if found.
         boolean success = customerManagementService.deleteCustomer(customerId);
 
         if (success) {
+
+            // Return success response.
             return ResponseEntity.ok().body("Customer Id " + customerId + " was successfully un-registered.");
         } else {
+
+            // Return error response if customer was not found.
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Customer Id " + customerId + " not found.");
         }
     }
